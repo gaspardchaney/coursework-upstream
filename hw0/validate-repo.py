@@ -33,11 +33,11 @@ from validators import (
     GitRepoRemoteValidator,
 )
 
-from common import gen_gradescope_output
+from common import gen_validator_output
 
 
 @click.command(name="validate-repo")
-@click.option("--gradescope", type=click.File("w"))
+@click.option("--gradescope", type=click.Path())
 @click.option("--base-dir", type=click.Path(exists=True, file_okay=False))
 def cmd(gradescope, base_dir):
     if base_dir is not None:
@@ -129,33 +129,7 @@ def cmd(gradescope, base_dir):
 
         validators += [is_repo, readme_added, readme2_added, origin_remote, origin_upstream]
 
-    if all(v.valid for v in validators):
-        if gradescope is None:
-            print("Your repository appears to be correctly set up.")
-            print("Don't forget to submit it on Gradescope!")
-        else:
-            print("The files you have submitted appear to be correct.")
-            print()
-            print("Don't forget to click on the 'Code' tab to double-check")
-            print("that all your files are there. You should do this in all")
-            print("your homework submissions!")
-            gen_gradescope_output(gradescope, 1.0)
-    else:
-        if gradescope is None:
-            print("There are a few issues with your repository:\n")
-        else:
-            print("There are a few issues with your submitted files:\n")
-
-        for v in validators:
-            if v.valid is not None and not v.valid:
-                print("-", v.error_msg, "\n")
-
-        if gradescope is not None:
-            gen_gradescope_output(
-                gradescope,
-                0.0,
-                output="Make sure to address the above issues, and to resubmit your repository",
-            )
+    gen_validator_output(validators, gradescope)
 
 
 if __name__ == "__main__":
