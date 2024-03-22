@@ -29,9 +29,9 @@ def test_task1(list_of_dicts: list[dict[str, int]], expected: tuple[str, int]) -
 def make_t1() -> TreeNode:
     """
          3
-       /   \
+       /   \\
       4     1
-     / \   / \
+     / \\   / \\
     5   1 4   3
     """
     n1 = TreeNode(3)
@@ -47,9 +47,9 @@ def make_t1() -> TreeNode:
 def make_t2() -> TreeNode:
     """
          1
-       /   \
+       /   \\
       2     3
-     / \   / \
+     / \\   / \\
     4   1 3   2
     """
     n1 = TreeNode(1)
