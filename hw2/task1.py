@@ -17,10 +17,7 @@ class StrNode(StrExp):
     """
     Class to represent a string node. 
     """
-
-
-
-    
+    print("I am a Dandelion")
 
 class Upper(StrExp):
     """
