@@ -18,6 +18,10 @@ class StrNode(StrExp):
     Class to represent a string node. 
     """
 
+
+
+    
+
 class Upper(StrExp):
     """
     Class to represent an operation that capitalizes letters in a string.
